@@ -14,10 +14,11 @@ jobs:
           python-version: '3.11'
       - run: python -m py_compile android_automation_engine.py device_controller.py
       - name: Validate page profiles
-        run: python - <<'PY'
+        run: |
+          python - <<'PY'
           import json
-          data=json.load(open('pages.json',encoding='utf-8'))
-          assert isinstance(data,list) and data
-          assert all(isinstance(x,dict) and x.get('page') for x in data)
+          data = json.load(open('pages.json', encoding='utf-8'))
+          assert isinstance(data, list) and data
+          assert all(isinstance(x, dict) and x.get('page') for x in data)
           print(f'{len(data)} page profiles validated')
           PY
